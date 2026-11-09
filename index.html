@@ -561,7 +561,7 @@ details.wal summary{cursor:pointer;font-weight:600;font-size:14px}
           <div class="zoom"><button id="zin" aria-label="Zoom in">+</button><button id="zout" aria-label="Zoom out">−</button><button id="zfit" aria-label="Reset zoom and pan" title="Reset zoom and pan only" style="padding:0 10px;font-size:13px">Fit view</button></div>
         </div>
         <div class="flowscroll" id="flowscroll">
-          <svg id="flow" viewBox="-130 0 1530 1320" role="img" aria-label="Flow map of TB data from patients to public portals">
+          <svg id="flow" viewBox="-130 0 1530 1388" role="img" aria-label="Flow map of TB data from patients to public portals">
             <defs>
               <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" style="fill:var(--sheet)"/><line x1="0" y1="0" x2="0" y2="8" style="stroke:var(--rule2)" stroke-width="2"/></pattern>
               <marker id="m-p" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="11" markerHeight="11" markerUnits="userSpaceOnUse" orient="auto"><path d="M0.5 1L9.5 5L0.5 9z" style="fill:#6F7B88;stroke:none"/></marker>
@@ -710,7 +710,7 @@ let EXPECT_INFRA={asha:'ASHA counts and contacts by village',phi:'Directory of p
 
 
 let COLS=[{t:'Community',x0:34,x1:222,req:'Every village and household'},{t:'Facility',x0:222,x1:402,req:'1.6 lakh+ health centres'},{t:'Sub-district (TB unit)',x0:402,x1:582,req:'~6,700 TB units'},{t:'District',x0:582,x1:762,req:'~700 district TB officers'},{t:'State',x0:762,x1:942,req:'36 state TB officers'},{t:'National',x0:942,x1:1122,req:'1 Central TB Division'},{t:'Public',x0:1160,x1:1380,pub:true,req:'Where anyone can find it'}];
-let LANES=[{t:'Specimen, imaging and genomic data',y0:44,y1:150},{t:'Forms and registers to be filled',y0:150,y1:330},{t:'Diagnostics and lab network',y0:330,y1:430},{t:'Care pathway',y0:430,y1:700},{t:'Programme staff and health offices',y0:700,y1:780},{t:'Government digital health infrastructure',y0:780,y1:1010},{t:'Other data sources',y0:1010,y1:1170},{t:'Where the data reaches',y0:1170,y1:1310}];
+let LANES=[{t:'Specimen, imaging and genomic data',y0:44,y1:150},{t:'Forms and registers to be filled',y0:150,y1:330},{t:'Diagnostics and lab network',y0:330,y1:430},{t:'Care pathway',y0:430,y1:700},{t:'Programme staff and health offices',y0:700,y1:780},{t:'Government digital health infrastructure',y0:780,y1:1078},{t:'Other data sources',y0:1078,y1:1238},{t:'Where the data reaches',y0:1238,y1:1378}];
 const N=(id,label,x,y,w,h,type,desc,extra)=>Object.assign({id,label,x,y,w,h,type,desc},extra||{});
 let NODES=[
  // specimen / imaging / genomic
@@ -724,19 +724,19 @@ let NODES=[
  N('nrl','National ref. lab (NRL)',1034,380,160,38,'place','National reference laboratories: quality assurance and certification for culture and DST labs, and the link to the WHO supranational network.',{lvl:5,cap:'6 NRLs'}),
  // care
  N('person','Person with symptoms',128,470,170,40,'place','Someone with TB symptoms: a cough for two weeks or more, fever, night sweats or weight loss.',{lvl:0}),
- N('asha','ASHA / ANM',128,532,170,40,'place','Community health workers who find people with symptoms, refer them, screen household contacts and support treatment.',{lvl:0}),
+ N('asha','ASHA / ANM',128,532,170,40,'place','Community health workers. The ASHA fills the Community Based Assessment Checklist (CBAC) house to house; since 2018 it includes TB symptom questions. She identifies people with presumptive TB and mobilises, preferably accompanies, them to the sub-centre (Ayushman Arogya Mandir). During treatment she supports adherence and passes the patient\'s bank details to the CHO, MO or STS for entry in Ni-kshay, so DBT payments can be made.',{lvl:0}),
  N('village','Village, household',128,600,170,40,'place','The unit the Census and household surveys count.',{lvl:0}),
  N('sc','Sub-centre / HWC',312,470,170,40,'place','Screens for symptoms and can collect a sputum sample; no testing equipment.',{lvl:1}),
  N('phc','PHC',312,532,170,40,'place','A medical officer records symptoms and sends sputum for testing. A few PHCs have TrueNat.',{lvl:1}),
- N('chc','CHC / hospital',312,594,170,40,'place','Community health centre or civil hospital; some hold a microscopy centre.',{lvl:1}),
+ N('chc','CHC / block hospital',312,594,170,40,'place','Community health centre or block-level hospital; some hold a microscopy centre. It files its monthly facility report in HMIS.',{lvl:1}),
  N('pvt','Private provider',312,656,170,40,'place','Private clinics, hospitals and labs. Some notify cases into Ni-kshay.',{lvl:1}),
- N('city','Cities and ULBs',660,650,150,44,'note','Cities are governed by urban local bodies, a hierarchy that runs alongside the rural one. A city can sit inside a sub-district or span a whole district. Large cities run their own City TB Centres at district level: Maharashtra lists 22 city TB centres, plus 24 ward-wise TB centres in Mumbai. Their health data flows through municipal systems as well as NTEP.',{status:'No city or ULB resource appears in this scan. Urban holdings would sit on municipal portals, IUDX or smart-city dashboards, and need their own row in the footer once found.'}),
+ N('city','Cities and ULBs',492,1188,150,44,'note','Cities are governed by urban local bodies, a hierarchy that runs alongside the rural one. A city can sit inside a sub-district or span a whole district. Large cities run their own City TB Centres at district level: Maharashtra lists 22 city TB centres, plus 24 ward-wise TB centres in Mumbai. Their health data flows through municipal systems as well as NTEP.',{status:'No city or ULB resource appears in this scan. Urban holdings would sit on municipal portals, IUDX or smart-city dashboards, and need their own row in the footer once found.'}),
  N('dh','District hospital, DTC',672,470,170,40,'place','District hospital with the District TB Centre attached.',{lvl:3}),
  // staff
  N('phi','PHI officer',290,721,112,32,'staff','Staff at the peripheral health institute who enter and update each case in Ni-kshay.',{lvl:1}),
- N('tu','TU officer',470,721,112,32,'staff','TB unit team overseeing treatment across a sub-district.',{lvl:2}),
- N('dto','DTO',650,721,112,32,'staff','District TB officer: reviews outcomes and reports district performance upward.',{lvl:3}),
- N('sto','STO',830,721,112,32,'staff','State TB officer: compiles state reports and drug-resistant TB outcomes.',{lvl:4}),
+ N('tu','TU officer',470,721,112,32,'staff','TB unit team across a sub-district: the medical officer (MO-TC), senior treatment supervisor (STS) and data entry operator. The data entry operator enters each notified patient, public or private, into Ni-kshay and updates treatment follow-up, outcomes, Aadhaar and bank details; the STS and MO-TC verify the entries and remove duplicates.',{lvl:2}),
+ N('dto','DTO',650,721,112,32,'staff','District TB officer. The District TB Centre\'s data entry operator enters and updates records in Ni-kshay. The DTO checks the eligibility of patients notified there against past notification, removes duplicates, verifies treatment supporters and private providers, monitors Aadhaar, bank and DBT progress, and reports district performance upward.',{lvl:3}),
+ N('sto','STO',830,721,112,32,'staff','State TB officer: supports notification in Ni-kshay, monitors district-wise progress there, including Aadhaar, bank and DBT payments, and compiles state reports and drug-resistant TB outcomes.',{lvl:4}),
  N('bho','Block health office',488,760,150,32,'staff','The block programme management unit validates facility reports in HMIS and holds the sub-district aggregates. Generic: every programme reporting through HMIS passes here.',{lvl:2}),
  N('dho','District health office',668,760,150,32,'staff','The district programme management unit validates facility reports in HMIS and holds the district aggregates. Generic: every disease programme reports through it.',{lvl:3}),
  N('sho','State health office',848,760,150,32,'staff','The state programme management unit aggregates district reports to state level. Generic across programmes.',{lvl:4}),
@@ -744,35 +744,40 @@ let NODES=[
  // digital
  N('dots','99DOTS / MERM',128,840,170,40,'gap','Adherence calls and smart pillboxes that log each dose.',{lvl:0,status:'Not published at any level, not even as aggregates.',route:'Ask CTD for district adherence summaries; patient-level logs should stay closed.'}),
  N('sathi','TB Aarogya Sathi',128,908,170,40,'gap','Citizen app with TB information, side effects and a facility locator.',{lvl:0,status:'Usage data are not published.',route:'Ask for anonymised usage statistics by state.'}),
- N('nikshay','Ni-kshay portal',762,840,712,44,'bar','The national case-based TB record. Every notification, test, treatment and outcome lands here.',{lvl:2,status:'Case records are closed. The public sees Ni-kshay only through reports and parliament answers.'}),
+ N('nikshay','Ni-kshay portal',668,840,524,44,'bar','The national case-based TB record. Every notification, test, treatment and outcome lands here. It is integrated with LIMS, 99DOTS, Nikshay Aushadhi, Prevent TB and PFMS (for DBT payments).',{lvl:2,status:'Case records are closed. The public sees Ni-kshay only through reports and parliament answers.'}),
  N('app','Ni-kshay app',312,908,160,40,'gap','Field app used by health staff to record and update cases.',{lvl:1,status:'Feeds Ni-kshay. Nothing is published from the app itself.'}),
  N('setu','Ni-kshay SETU',492,908,160,40,'gap','Support app for health workers linked to Ni-kshay.',{lvl:2,status:'Not published at any level.'}),
  N('npy','NPY DBT module',672,908,160,40,'gap','Nikshay Poshan Yojana: nutrition payments to patients.',{lvl:3,status:'Only occasional national or state totals reach parliament answers.',route:'RTI for district-wise beneficiaries and payment delays.'}),
  N('eaus','E-Aushadhi',852,908,160,40,'gap','Drug stock and supply-chain system.',{lvl:4,status:'Only a one-off national stock answer is public.',route:'RTI to state drug corporations for quarterly stock by district.'}),
  N('sampark','Ni-kshay Sampark',1032,908,160,40,'gap','Multilingual call centre for counselling and grievances.',{lvl:5,status:'Call and grievance volumes are not published.'}),
- N('hmis','HMIS',700,972,836,44,'bar','Health Management Information System: monthly facility reports for every programme, TB items among hundreds of others.',{lvl:1,source:true}),
+ N('hmis','HMIS',700,1040,836,44,'bar','Health Management Information System: monthly facility reports for every programme, TB items among hundreds of others.',{lvl:1,source:true}),
+ N('lims','LIMS',1040,840,150,40,'place','Laboratory Information Management System for TB labs, built by FIND with Global Fund support. National, but functional only in reference laboratories. Integrated with Ni-kshay, so lab results pass into the patient record.',{lvl:4}),
+ N('tbmitra','TB Mitra',128,972,170,40,'place','Community-led monitoring app (Dure Technologies, USAID support). The 2021-22 assessment lists it as in the process of integration with Ni-kshay.',{lvl:0}),
+ N('qure','Qure.ai CXR',312,972,160,40,'place','AI reading of chest X-rays (Qure.ai, Global Fund support), a pilot. Integrating AI X-ray readings into Ni-kshay is planned, not done.',{lvl:1}),
+ N('prevtb','Prevent TB',492,972,160,40,'place','Contact-tracing and TB preventive treatment app (Dure Technologies, WHO support), piloted in Kerala and Chhattisgarh. Ni-kshay is integrated with it, and contact tracing is moving into Ni-kshay itself.',{lvl:2}),
+ N('pfms','PFMS',672,972,160,40,'place','Public Financial Management System. Ni-kshay\'s DBT module pays patient support, treatment-supporter honoraria and private-provider incentives through it.',{lvl:5}),
  // other sources
- N('surveys','Health surveys',128,1060,170,40,'source','NFHS, DLHS, AHS, CAB and LASI rounds that ask households about TB and risk factors.',{lvl:0}),
- N('census','Census amenities',128,1120,170,40,'source','Census 2011 village and town amenities, which record TB clinics village by village.',{lvl:0}),
- N('rch','RCH portal',312,1060,150,40,'source','Reproductive and child health reporting, including BCG.',{lvl:1}),
- N('registries','Facility lists',492,1060,150,40,'source','Facility directories, geolocations and performance tables.',{lvl:2}),
- N('cpcb','CPCB air quality',672,1060,160,40,'source','Ambient air quality monitoring, a TB risk factor.',{lvl:3}),
- N('ncrb','NCRB returns',852,1060,150,40,'source','Returns that include natural deaths in prisons by cause.',{lvl:4}),
- N('icmr','ICMR research',1032,1060,150,40,'source','Studies, reports, briefs, trial registries and repositories from ICMR and its institutes.',{lvl:5}),
- N('direct','Direct uploads',852,1120,150,40,'source','One-off files and AI models uploaded straight to a portal.',{lvl:5}),
+ N('surveys','Health surveys',128,1128,170,40,'source','NFHS, DLHS, AHS, CAB and LASI rounds. They sample households and interview or measure the people in them about TB and its risk factors.',{lvl:0}),
+ N('census','Census amenities',128,1188,170,40,'source','Census 2011 village and town amenities, which record TB clinics village by village.',{lvl:0}),
+ N('rch','RCH portal',312,1128,150,40,'source','Reproductive and child health reporting, including BCG.',{lvl:1}),
+ N('registries','Facility lists',492,1128,150,40,'source','Facility directories, geolocations and performance tables.',{lvl:2}),
+ N('cpcb','CPCB air quality',672,1128,160,40,'source','Ambient air quality monitoring, a TB risk factor.',{lvl:3}),
+ N('ncrb','NCRB records',852,1128,150,40,'source','Returns that include natural deaths in prisons by cause.',{lvl:4}),
+ N('icmr','ICMR research',1032,1128,150,40,'source','Studies, reports, briefs, trial registries and repositories from ICMR and its institutes.',{lvl:5}),
+ N('direct','Direct uploads',852,1188,150,40,'source','One-off files and AI models uploaded straight to a portal.',{lvl:5}),
  // public
  N('itr','India TB Report',1270,300,190,42,'report','The annual NTEP report compiled by CTD.',{pub:true}),
  N('aikosh','AIKosh',1270,400,190,58,'portal','IndiaAI\'s dataset platform.',{pub:true}),
  N('parl','Parliament answers',1270,520,190,42,'report','Answers in the Rajya Sabha, re-hosted as tables on data.gov.in.',{pub:true}),
  N('datagov','data.gov.in',1270,620,190,58,'portal','The Open Government Data platform.',{pub:true}),
  N('icmrp','ICMR sites',1270,860,190,58,'portal','ICMR headquarters and institute websites and repositories.',{pub:true}),
- N('ibdc','IBDC (DBT)',1270,960,190,58,'todo','India\'s national repository for life-science data, with open and controlled-access archives.',{pub:true,status:'Not yet scanned for TB.'})
+ N('ibdc','IBDC (DBT)',1270,1028,190,58,'todo','India\'s national repository for life-science data, with open and controlled-access archives.',{pub:true,status:'Not yet scanned for TB.'})
 ];
 let NM={};NODES.forEach(n=>NM[n.id]=n);NM.nikshay.closed='Case records closed. Public only via reports';NM.nikshay.closedShort='records closed; figures via reports';
 const Lp=n=>[n.x-n.w/2,n.y],Rp=n=>[n.x+n.w/2,n.y],Tp=n=>[n.x,n.y-n.h/2],Bp=n=>[n.x,n.y+n.h/2];
-let TRUNK={aikosh:1128,datagov:1138,icmrp:1148,ibdc:1156},BUS={aikosh:1158,datagov:1164,icmrp:1150,ibdc:1144};
+let TRUNK={aikosh:1128,datagov:1138,icmrp:1148,ibdc:1156},BUS={aikosh:1226,datagov:1232,icmrp:1218,ibdc:1212};
 let INSTR_LANE=[
- {col:0,x:128,items:['ASHA field register','CBAC risk assessment'],full:['ASHA field register entries','CBAC household risk assessment form']},
+ {col:0,x:128,items:['ASHA field register','CBAC risk assessment'],full:['ASHA field register entries','CBAC household risk assessment form'],to:'asha',link:[[205,218],[205,228],[215,228],[215,501],[175,501],[175,512]]},
  {col:1,x:312,items:['PHI monthly PMR','Treatment card','TB identity card'],full:['Revised PHI monthly PMR reporting format','TB treatment card','TB identity card']},
  {col:2,x:492,items:['TU PMR','TB register','DMC lab register','Sputum conversion report','Ni-kshay Diwas format'],full:['Revised TU PMR reporting format','TB register (TU)','DMC laboratory register (via Ni-kshay)','Quarterly reporting format on sputum conversion','Ni-kshay Diwas reporting format']},
  {col:3,x:672,items:['District PMR','Case-finding report','Treatment-outcome report','PMDT register (DR-TB)','Gram panchayat claims'],full:['Revised district PMR reporting format','Quarterly reporting format on case finding','Quarterly reporting format on result of treatment','PMDT register for drug-resistant TB','Gram panchayat claim verification forms']},
@@ -790,33 +795,42 @@ let EDGES=[
  E('person','phc','p'),E('dmc','iphl','p'),
  E('phc','phi','e',()=>({o:[[227,544],[219,544],[219,700],[290,700],[290,705]]})),
  E('eaus','ctd','e',()=>({o:[[852,888],[852,872],[950,872],[950,737]]})),
- E('registries','parl','e',()=>({o:[[492,1080],[492,1092],[1152,1092],[1152,528],[1175,528]]})),
  E('phc','bho','r',()=>({o:[[397,548],[405,548],[405,760],[413,760]]})),E('bho','dho','r'),E('dho','sho','r'),
- E('bho','hmis','e',()=>({o:[[470,776],[470,796],[412,796],[412,950]]})),
- E('dho','hmis','e',()=>({o:[[640,776],[640,790],[404,790],[404,950]]})),E('sho','hmis','e',()=>({o:[[820,776],[820,784],[396,784],[396,950]]})),
+ E('bho','hmis','e',()=>({o:[[470,776],[470,796],[412,796],[412,1018]]})),
+ E('dho','hmis','e',()=>({o:[[640,776],[640,790],[404,790],[404,1018]]})),E('sho','hmis','e',()=>({o:[[820,776],[820,784],[396,784],[396,1018]]})),
  E('phi','tu','r'),E('tu','dto','r'),E('dto','sto','r'),E('sto','ctd','r'),
  // data entry into Ni-kshay
  E('phi','nikshay','e',()=>({o:[[290,737],[290,800],[420,800],[420,818]]})),
  E('pvt','nikshay','e',()=>({o:[[397,656],[420,656],[420,818]]})),
  E('dmc','nikshay','e',()=>({o:[[572,399],[572,818]]})),
  E('iphl','nikshay','e',()=>({o:[[752,399],[752,818]]})),
- E('irl','nikshay','e',()=>({o:[[927,399],[927,818]]})),
+ E('irl','lims','e',()=>({o:[[900,399],[900,690],[1070,690],[1070,820]]})),
+ E('nrl','lims','e',()=>({o:[[1034,399],[1034,676],[1090,676],[1090,820]]})),
+ E('lims','nikshay','e',()=>({o:[[965,840],[930,840]]})),
  E('dots','nikshay','e',()=>({o:[[213,840],[406,840]]})),
  E('sathi','nikshay','e',()=>({o:[[213,908],[240,908],[240,884],[440,884],[440,862]]})),
  E('app','nikshay','e',()=>({o:[[392,908],[470,908],[470,862]]})),
  E('setu','nikshay','e',()=>({o:[[492,888],[492,862]]})),
  E('npy','nikshay','e',()=>({o:[[672,888],[672,862]]})),
  E('eaus','nikshay','e',()=>({o:[[852,888],[852,862]]})),
- E('sampark','nikshay','e',()=>({o:[[1032,888],[1032,862]]})),
+ E('sampark','nikshay','e',()=>({o:[[952,904],[940,904],[940,850],[930,850]]})),
+ E('npy','pfms','e',()=>({o:[[672,928],[672,952]]})),
+ E('prevtb','nikshay','e',()=>({o:[[572,966],[582,966],[582,862]]})),
+ E('person','tbmitra','e',()=>({o:[[100,450],[100,444],[6,444],[6,972],[43,972]]})),
+ E('person','surveys','e',()=>({o:[[43,460],[12,460],[12,1120],[43,1120]]})),
+ E('asha','sc','p',()=>({o:[[213,520],[220,520],[220,484],[227,484]]})),
+ E('tu','nikshay','e',()=>({o:[[414,729],[409,729],[409,818]]})),
+ E('dto','nikshay','e',()=>({o:[[594,729],[584,729],[584,818]]})),
+ E('nikshay','sto','e',()=>({o:[[764,818],[764,729],[774,729]]})),
  E('person','dots','e',()=>({o:[[43,470],[24,470],[24,840],[43,840]]})),
  E('person','sathi','e',()=>({o:[[43,480],[18,480],[18,908],[43,908]]})),
- E('village','surveys','e',()=>({o:[[43,600],[30,600],[30,1060],[43,1060]]})),
- E('village','census','e',()=>({o:[[43,610],[36,610],[36,1120],[43,1120]]})),
- E('sc','hmis','e',()=>({o:[[227,462],[210,462],[210,962],[282,962]]})),
- E('phc','hmis','e',()=>({o:[[227,532],[216,532],[216,972],[282,972]]})),
- E('chc','hmis','e',()=>({o:[[227,600],[222,600],[222,982],[282,982]]})),
- E('sc','rch','e',()=>({o:[[227,478],[204,478],[204,1060],[237,1060]]})),
- E('nikshay','ctd','e',()=>({o:[[1000,818],[1000,737]]})),
+ E('village','surveys','e',()=>({o:[[43,600],[30,600],[30,1128],[43,1128]]})),
+ E('village','census','e',()=>({o:[[43,610],[36,610],[36,1188],[43,1188]]})),
+ E('sc','hmis','e',()=>({o:[[227,462],[210,462],[210,1030],[282,1030]]})),
+ E('phc','hmis','e',()=>({o:[[227,532],[216,532],[216,1040],[282,1040]]})),
+ E('chc','hmis','e',()=>({o:[[227,600],[222,600],[222,1050],[282,1050]]})),
+ E('sc','rch','e',()=>({o:[[227,478],[204,478],[204,1128],[237,1128]]})),
+ E('nikshay','ctd','e',()=>({o:[[920,818],[920,790],[1000,790],[1000,737]]})),
  E('ctd','itr','e',()=>({o:[[1056,716],[1140,716],[1140,300],[1175,300]]})),
  E('ctd','parl','e',()=>({o:[[1056,728],[1146,728],[1146,520],[1175,520]]})),
  E('imaging','icmrp','t'),E('genomic','ibdc','t')
@@ -883,8 +897,7 @@ function renderFilters(){
     if(pass(d,'refs')&&d.rt==='REFERENCE')nref++;if(pass(d,'review')&&d.review)nrev++;});
   const SHORT=DX.kindShort;
   const fw=(n,lab)=>`flex-grow:${Math.sqrt(Math.max(n,1)).toFixed(2)};min-width:${Math.round(lab.length*6.8+30)}px`;
-  $('fKind').innerHTML=KINDS.map(x=>{const n=kc[x.k]||0;const on=S.kinds.has(x.k);return `<button class="kseg" data-kind="${x.k}" aria-pressed="${on}" style="${fw(n,SHORT[x.k])};background:${x.col};--kc:${x.col}" title="${esc(x.label)}: ${fmt(n)}. ${esc(x.desc)} Click to ${on?'hide':'show'}." aria-label="${esc(x.label)}, ${fmt(n)}"><span class="kl">${esc(SHORT[x.k])}</span><span class="n">${fmt(n)}</span></button>`;}).join('')+
-    `<button class="kseg" data-refs="1" aria-pressed="${S.refs}" style="${fw(nref,'Mentions')};background:#B8C0CA;--kc:#B8C0CA;color:#0F2742" title="Mentions: programme names, meetings and networks named in documents. Not data. Click to ${S.refs?'hide':'show'}."><span class="kl">Mentions</span><span class="n">${fmt(nref)}</span></button>`;
+  $('fKind').innerHTML=KINDS.filter(x=>x.k!=='NOT_TB').map(x=>{const n=kc[x.k]||0;const on=S.kinds.has(x.k);return `<button class="kseg" data-kind="${x.k}" aria-pressed="${on}" style="${fw(n,SHORT[x.k])};background:${x.col};--kc:${x.col}" title="${esc(x.label)}: ${fmt(n)}. ${esc(x.desc)} Click to ${on?'hide':'show'}." aria-label="${esc(x.label)}, ${fmt(n)}"><span class="kl">${esc(SHORT[x.k])}</span><span class="n">${fmt(n)}</span></button>`;}).join('');
   $('fRung').innerHTML=[0,1,2,3,4,5].map(k=>`<button class="oseg" data-rung="${k}" aria-pressed="${S.rungs.has(k)}" style="--osc:var(--r${k})" title="${esc(RUNG[k])}: ${fmt(rc[k])}. Click to ${S.rungs.has(k)?'hide':'show'}."><span class="ol">${esc(RUNG_SHORT[k])}</span><span class="sn">${fmt(rc[k])}</span></button>`).join('');
   $('fLink').innerHTML=`<div class="drow2"><span class="dgl"></span><div class="dchips"><button class="dchip all" role="radio" data-link="" aria-checked="${!S.link}">All data</button></div></div>`+LINKGROUPS.map(g=>`<div class="drow2"><span class="dgl">${esc(g.g)}</span><div class="dchips">${g.items.map(([k,l])=>{const n=lk[k]||0;return `<button class="dchip${n?'':' zero'}" role="radio" data-link="${k}" aria-checked="${S.link===k}" title="${esc(VDEF.link[k]||l)}${n?'':' No dataset in the scan.'}">${esc(l)}<span class="n">${fmt(n)}</span></button>`;}).join('')}</div></div>`).join('');
   // badges, review toggle, tokens, counts
@@ -894,7 +907,7 @@ function renderFilters(){
   $('resetAll').classList.toggle('hidden',!changed);
   $('revBtn').setAttribute('aria-checked',S.reviewOnly);$('revN').textContent=`${fmt(nrev)} flagged`;
   renderYear();
-  $('shownN').textContent=fmt(filtered().length);$('ofN').textContent=`of ${fmt(DS.length)}`;
+  $('shownN').textContent=fmt(filtered().length);$('ofN').textContent=`of ${fmt(DS.filter(d=>d.kind!=='NOT_TB'&&d.rt!=='REFERENCE').length)}`;
   const lb=$('linkBanner');
   if(S.link&&!filtered().length){lb.innerHTML=`<span><b>No dataset</b> in the scan links ${DX.short} with <b>${esc(lname(S.link))}</b>. ${esc(DX.linkGap)}</span><button data-link="">Show all data</button>`;lb.classList.remove('hidden');}
   else if(S.link){const n=filtered().length;const hold=new Set();filtered().forEach(d=>{d.fp.forEach(x=>hold.add(x));d.about.forEach(x=>hold.add(x));});
@@ -1029,8 +1042,8 @@ function highlight(){
 }
 function renderBg(){
   const XR=COLS[COLS.length-1].x1;
-  let h=`<rect x="-130" y="0" width="164" height="1310" style="fill:var(--sheet)"/>`;
-  COLS.forEach((c,i)=>{h+=`<rect class="colbg ${c.pub?'pub':i%2?'alt':''}" x="${c.x0}" y="0" width="${c.x1-c.x0}" height="1310"/>`;h+=`<text class="colh" x="${(c.x0+c.x1)/2}" y="21" text-anchor="middle">${esc(c.t)}</text><text x="${(c.x0+c.x1)/2}" y="37" text-anchor="middle" style="font-size:11px;fill:var(--muted);font-family:var(--font)">${esc(c.req)}</text>`;});
+  const LH=LANES[LANES.length-1].y1;let h=`<rect x="-130" y="0" width="164" height="${LH}" style="fill:var(--sheet)"/>`;
+  COLS.forEach((c,i)=>{h+=`<rect class="colbg ${c.pub?'pub':i%2?'alt':''}" x="${c.x0}" y="0" width="${c.x1-c.x0}" height="${LH}"/>`;h+=`<text class="colh" x="${(c.x0+c.x1)/2}" y="21" text-anchor="middle">${esc(c.t)}</text><text x="${(c.x0+c.x1)/2}" y="37" text-anchor="middle" style="font-size:11px;fill:var(--muted);font-family:var(--font)">${esc(c.req)}</text>`;});
   LANES.forEach((l,i)=>{ if(i>0)h+=`<line class="laneline" x1="-130" x2="${XR}" y1="${l.y0}" y2="${l.y0}"/>`;if(l.t){const words=l.t.split(' ');const lines=[];let cur='';words.forEach(w=>{if((cur+' '+w).trim().length>15){lines.push(cur.trim());cur=w;}else cur+=' '+w;});if(cur.trim())lines.push(cur.trim());
       const y0=l.y0+18;h+=`<text class="lanel" style="font-size:12.5px;font-weight:620;fill:var(--muted)">${lines.map((ln,j)=>`<tspan x="-120" y="${y0+j*15}">${esc(ln)}</tspan>`).join('')}</text>`;}});
   h+=`<line class="laneline" x1="-130" x2="${XR}" y1="44" y2="44"/>`;
@@ -1110,7 +1123,9 @@ function renderFlow(){
     INSTR_LANE.forEach(g=>{const bw=INSTR_W,bh=30+g.items.length*14,bx=g.x-bw/2,by=INSTR_Y;
       nh+=`<g class="instr" data-instr="${g.col}"><rect x="${bx}" y="${by}" width="${bw}" height="${bh}" rx="5" style="fill:var(--sheet);stroke:var(--r4);stroke-width:0.8;stroke-dasharray:4 3"/>`+
         `<text class="s" x="${bx+8}" y="${by+15}" style="font-size:11px;font-weight:620;fill:var(--r4)">${g.items.length} instruments</text>`+
-        g.items.map((s,j)=>`<text class="s" x="${bx+8}" y="${by+31+j*14}" style="font-size:11.5px;fill:var(--ink)">${esc(s)}</text>`).join('')+`</g>`;});
+        g.items.map((s,j)=>`<text class="s" x="${bx+8}" y="${by+31+j*14}" style="font-size:11.5px;fill:var(--ink)">${esc(s)}</text>`).join('')+`</g>`;
+      (g.links||[]).forEach(k=>{if(!NM[k.to])return;const L=k.pts,e=L[L.length-1];nh+=`<g class="instr-link" aria-label="${esc(g.items.join(', '))} go into ${esc(NM[k.to].label)}"><polyline points="${L.map(p=>p.join(',')).join(' ')}" style="fill:none;stroke:var(--r4);stroke-width:1.2;stroke-dasharray:4 3"/><circle cx="${e[0]}" cy="${e[1]}" r="2.6" style="fill:var(--r4)"/></g>`;});
+      if(g.link&&NM[g.to]){const L=g.link,e=L[L.length-1];nh+=`<g class="instr-link" aria-label="${esc(g.items.join(', '))} filled by ${esc(NM[g.to].label)}"><polyline points="${L.map(p=>p.join(',')).join(' ')}" style="fill:none;stroke:var(--r4);stroke-width:1.2;stroke-dasharray:4 3"/><circle cx="${e[0]}" cy="${e[1]}" r="2.6" style="fill:var(--r4)"/></g>`;}});
   }
   // footer: which places show up in the data (plain cards + a real India map)
   nh+=footerSVG(st.list);
@@ -1216,7 +1231,7 @@ function fcard(x,y,w,h,foot,lines){
 function covBar(x,y,w,a,b){const fa=Math.round(w*a/Math.max(1,a+b));
   return `<rect x="${x}" y="${y}" width="${fa}" height="10" rx="2" style="fill:var(--r4)"/><rect x="${x+fa}" y="${y}" width="${w-fa}" height="10" rx="2" style="fill:url(#hatch);stroke:var(--gap);stroke-width:.7"/>`;}
 function footerSVG(list){
-  const pc=placeCounts(list);const Y=1184,H=112;let s='';
+  const pc=placeCounts(list);const Y=LANES[LANES.length-1].y0+14,H=112;let s='';
   const distTotal=Object.values(MAP.distTotal).reduce((a,b)=>a+b,0);
   const dNamed=Object.keys(pc.di).length;const sNamed=Object.keys(pc.st).length;
   const neverSt=MAP.states.map(p=>p.n).filter(n=>!pc.st[n]);
@@ -1699,7 +1714,8 @@ $('next').addEventListener('click',()=>{S.page++;renderCat();});
 
 /* ================= INSTRUMENTS (forms and registers) ================= */
 let INSTR={
- sc:['Sub-centre TB register entries','CBAC household risk assessment'],
+ asha:['ASHA field register entries','CBAC household risk assessment form'],
+ sc:['Sub-centre TB register entries'],
  phi:['Revised PHI monthly PMR format','TB treatment card','TB identity card'],
  dmc:['DMC laboratory register','Quarterly report on sputum conversion'],
  tu:['Revised TU PMR format','TB register (TU)','Ni-kshay Diwas reporting format'],
@@ -1992,8 +2008,8 @@ function dengueConfig(){
  C.COLS=[{t:'Community',x0:34,x1:222,req:'Every household and ward'},{t:'Facility',x0:222,x1:402,req:'Sub-centres, PHCs, private clinics'},{t:'Block or city ward',x0:402,x1:582,req:'Blocks and city wards'},
   {t:'District',x0:582,x1:762,req:'About 780 districts'},{t:'State',x0:762,x1:942,req:'36 states and UTs'},{t:'National',x0:942,x1:1100,req:'NCVBDC, NCDC, ICMR'},
   {t:'Public',x0:1200,x1:1420,pub:true,req:'Where anyone can find it'}];
- C.LANES=[{t:'Vector, specimen and genomic data',y0:44,y1:176},{t:'Forms and registers to be filled',y0:176,y1:318},{t:'Diagnostics and lab network',y0:318,y1:430},{t:'Care pathway',y0:430,y1:640},
-  {t:'Programme staff and health offices',y0:640,y1:790},{t:'Government digital health infrastructure',y0:790,y1:1036},{t:'Other data sources',y0:1036,y1:1170},{t:'Where the data reaches',y0:1170,y1:1310}];
+ C.LANES=[{t:'Vector, specimen and genomic data',y0:44,y1:176},{t:'Forms and registers to be filled',y0:176,y1:318},{t:'Diagnostics and lab network',y0:318,y1:430},{t:'Care pathway',y0:430,y1:600},
+  {t:'Programme staff and health offices',y0:600,y1:790},{t:'Government digital health infrastructure',y0:790,y1:1036},{t:'Other data sources',y0:1036,y1:1170},{t:'Where the data reaches',y0:1170,y1:1310}];
  const NX=1021,PX=1310;
  C.NODES=[
   // vector, specimen and genomic
@@ -2001,14 +2017,14 @@ function dengueConfig(){
   N('dbc','Breeding checkers, ASHA, MPW',128,138,176,32,'staff','Domestic breeding checkers (a municipal cadre, notably in Delhi), ASHAs, multipurpose workers and ward vector-control inspectors inspect houses, empty breeding sites and record the house, container and Breteau indices.',{lvl:0}),
   N('vclog','Hotspots and control records',492,138,170,34,'gap','Ward hotspot lists, anti-larval rounds, fogging, breeding notices and fines, kept by municipal health departments and district VBD offices. Hotspots are marked from case addresses and larval surveys.',{lvl:2,status:'Not published as data. Hotspot counts and control totals surface only in the press, such as BBMP\'s 30 dengue hotspots, MCD\'s 250 breeding hotspots, and MCD Delhi\'s 16,261 notices and 856 challans in April 2026.',route:'Ask municipal health departments for ward-wise hotspot lists and monthly control totals.'}),
   N('vcw','Vector-control wing',672,92,170,36,'place','Municipal and district vector-control teams. Anti-larval work is weekly and routine: source reduction, temephos and larvivorous fish. Anti-adult work is triggered by cases within 24 hours: indoor space spray with pyrethrum and outdoor thermal or ULV fogging. The board listed indoor residual spray, but that is a malaria and kala-azar tool, not a dengue one. Breeding notices and fines are issued under municipal acts and bye-laws.',{lvl:3}),
-  N('zonal','Zonal entomology',852,112,150,36,'place','NCVBDC runs entomological surveillance through 78 zonal entomology units under the states and 17 regional offices; sentinel sites are surveyed at least monthly in season. The board\'s "district entomology unit" exists only in some cities, such as Hyderabad\'s GHMC entomology wing.',{lvl:4,status:'NCVBDC publishes no indices. The only printed series found are tables in NCDC annual reports for 2014 to 2016, such as Rajamahendravaram and Kozhikode.'}),
+  N('zonal','Zonal entomologist',852,112,150,36,'place','NCVBDC runs entomological surveillance through 78 zonal entomology units under the states and 17 regional offices; sentinel sites are surveyed at least monthly in season. From larval surveys the entomologist calculates the House Index (HI), Container Index (CI) and Breteau Index (BI), and shares them with district health authorities (CMO/DHO), surveillance units and epidemiologists, rapid response and vector-control teams, and municipalities and communities. The board\'s "district entomology unit" exists only in some cities, such as Hyderabad\'s GHMC entomology wing.',{lvl:4,status:'NCVBDC publishes no indices. The only printed series found are tables in NCDC annual reports for 2014 to 2016, such as Rajamahendravaram and Kozhikode.'}),
   N('entonat','Aedes resistance studies',NX,84,150,36,'source','NCVBDC\'s entomology division and ICMR institutes (NIMR, VCRC) study Aedes insecticide resistance, such as kdr mutations. Published as research, not as a routine series.',{lvl:5}),
   N('seq','Serotypes and genomes',NX,138,150,34,'source','Serotyping and sequencing at ICMR-NIV Pune and VRDLs: 45 VRDLs serotyped 6,889 positive samples in 2023 to 2025, with DENV-2 leading. Sequences go to NCBI GenBank; IBDC\'s Indian Nucleotide Data Archive lists two dengue sequencing studies.',{lvl:5}),
   // labs
   N('pvtlab','Private labs',312,374,160,36,'gap','Private and state-contracted labs run NS1 and IgM tests, often rapid kits that count only as probable dengue. Some states cap prices: Karnataka ₹300 for ELISA, Maharashtra ₹600.',{lvl:1,status:'Results sit on the labs\' own portals; whether they reach IHIP depends on state notification rules.',route:'Ask the state IDSP unit for private-lab L-form counts by district.'}),
-  N('sshlab','Sentinel hospital (SSH)',672,374,170,38,'place','Sentinel surveillance hospitals test with IgM MAC-ELISA (and NS1 ELISA), free for patients, and tell the district VBD officer or municipal health officer within 24 hours. Most are district hospitals and medical colleges. In practice positives often reach PHCs by WhatsApp before portal entry.',{lvl:3,cap:'869 SSHs'}),
+  N('sshlab','Sentinel hospital / DPHL',672,374,170,38,'place','Sentinel surveillance hospitals test with IgM MAC-ELISA (and NS1 ELISA), free for patients, and tell the district VBD officer or municipal health officer within 24 hours. Most are district hospitals and medical colleges. In practice positives often reach PHCs by WhatsApp before portal entry. District public health labs (DPHLs) also test for dengue and file IDSP L forms. Both send samples on to VRDLs.',{lvl:3,cap:'869 SSHs'}),
   N('arl','Apex referral lab',852,354,150,32,'place','Apex referral laboratories back up the sentinel hospitals with confirmation, quality control and training. The 2023 guidelines still say 17; NCVBDC now lists 27.',{lvl:4,cap:'27 ARLs'}),
-  N('vrdl','VRDL network',852,400,150,32,'place','ICMR-DHR Viral Research and Diagnostic Laboratories: 165 labs in three tiers (medical college, state, regional). A separate network from the SSHs, though many institutions are both. Dengue is the pathogen they find most often in acute fever.',{lvl:4,cap:'165 VRDLs'}),
+  N('vrdl','VRDL network',852,400,150,32,'place','ICMR-DHR Viral Research and Diagnostic Laboratories: 165 labs in three tiers (medical college, state, regional). A separate network from the SSHs, though many institutions are both. Dengue is the pathogen they find most often in acute fever. Samples come from field teams, PHCs and UPHCs, and from sentinel hospitals and district public health labs.',{lvl:4,cap:'165 VRDLs'}),
   N('kitbox','Test kits (IgM ELISA)',NX,527,150,150,'kit','How dengue test kits reach sentinel hospitals. Early each year NCVBDC uses the previous year\'s cases to set a tentative state-wise allocation of IgM MAC-ELISA kits (12,800 dengue kits for 2026, plus 5,400 for chikungunya). Each state sends its requirement to ICMR-NIV Pune, which ships the kits (96 tests each) to sentinel surveillance hospitals and apex referral labs and keeps a buffer stock. Testing is free for patients. The allocation is published as a PDF; how many kits each hospital used, and how many tests came back positive, is not.',
    {lvl:5,lines:[[1,'NCVBDC sets allocation'],[0,'from last year\'s cases'],[2,'State sends its need'],[0,'to ICMR-NIV Pune'],[3,'NIV ships kits (96 tests)'],[4,'SSHs and apex labs'],[0,'test patients for free']],foot:'2026: 12,800 dengue kits',status:'The state-wise allocation is public as a PDF. Kits used and tests run per hospital are not published.'}),
   N('niv','ICMR-NIV Pune',NX,374,150,38,'place','Supplies IgM MAC-ELISA kits (96 tests each) to sentinel hospitals and apex labs on each state\'s requirement, and holds the buffer stock. National reference and genotyping. NS1 kits are not in the central allocation; how states procure them was not verified.',{lvl:5}),
@@ -2019,20 +2035,23 @@ function dengueConfig(){
   N('sc','Sub-centre / HWC',312,522,170,38,'place','ANMs and multipurpose workers report suspected cases on the IDSP S form.',{lvl:1}),
   N('phc','PHC / UPHC',312,576,170,38,'place','The medical officer reports probable cases on the IDSP P form and sends a blood sample to a sentinel hospital. The board had only PHCs filling the P form; any public or private facility does.',{lvl:1}),
   N('chc','CHC, block hospital',492,522,170,38,'place','Reports probable cases on the P form and refers severe cases on.',{lvl:2}),
-  N('city','Cities and ULBs',492,600,150,40,'source','Cities are run by urban local bodies, which keep their own health, vector-control and civic records. Municipal corporations such as MCD Delhi, BMC Mumbai, KMC Kolkata, GHMC Hyderabad and BBMP Bengaluru run their own vector control and, in big cities, their own dengue surveillance. Smart Cities publish waste, water, housing, hospital, rainfall and disease files on the Smart Cities Mission portal; those files are the entries counted on this box.',{lvl:3,relx:408,status:'City disease files give one vector-borne count in which dengue cannot be separated. Ward-level dengue counts reach the public only through press notes, RTI-based reports such as Praja\'s, or research.'}),
+  N('city','Cities and ULBs',492,620,150,36,'source','Cities are run by urban local bodies, which keep their own health, vector-control and civic records. Municipal corporations such as MCD Delhi, BMC Mumbai, KMC Kolkata, GHMC Hyderabad and BBMP Bengaluru run their own vector control and, in big cities, their own dengue surveillance. Smart Cities publish waste, water, housing, hospital, rainfall and disease files on the Smart Cities Mission portal; those files are the entries counted on this box.',{lvl:3,relx:400,status:'City disease files give one vector-borne count in which dengue cannot be separated. Ward-level dengue counts reach the public only through press notes, RTI-based reports such as Praja\'s, or research.'}),
   N('dh','Hospital admission',672,476,170,40,'place','District hospitals and medical colleges admit severe cases. The treating physician records the course and outcome in the medical records department. HMIS counts dengue inpatients (item 13.4.2) and deaths (15.7.4); deaths are audited by state or district review committees, with no national procedure found.',{lvl:3}),
   // staff
-  N('bmo','Block medical officer',492,668,150,30,'staff','Custodian of S- and P-form data for the block, with PHC medical officers.',{lvl:2}),
+  N('bmo','Block medical officer',492,708,150,30,'staff','Custodian of S- and P-form data for the block, with PHC medical officers. Reports to the district VBD officer and the district surveillance officer.',{lvl:2}),
   N('dmo','VBD officer (DMO)',672,668,150,30,'staff','The district malaria officer runs the vector-borne disease programme (NVBDCP) in the district; 565 district malaria units function. Receives sentinel hospital results and sends the district dengue report to the state: suspected cases, samples, positives and deaths.',{lvl:3}),
-  N('dso','Surveillance officer',672,708,150,30,'staff','Heads the IDSP district surveillance unit: validates S, P and L forms on IHIP, investigates outbreaks with rapid response teams within 24 hours, and sends the weekly outbreak report to the state.',{lvl:3}),
+  N('dso','Surveillance officer',672,708,150,30,'staff','Heads the IDSP district surveillance unit: validates S, P and L forms on IHIP, investigates outbreaks with rapid response teams within 24 hours, and sends the weekly outbreak report to the state. Receives reports from block medical officers, rural PHCs and CHCs (through IHIP), the municipal health department and MSU, and entomological indices from the zonal entomologist.',{lvl:3}),
   N('mho','Municipal health officer',672,750,150,30,'staff','Runs urban surveillance and vector control for a city corporation, receives sentinel hospital results for urban cases and orders control action.',{lvl:3}),
+  N('dho','District health office (CMO)',672,620,150,30,'staff','District health services under the District Health Officer or Chief Medical Officer. It sits below the state health department and, in big cities, runs parallel to the municipal corporation\'s own health department. District programme officers, including the surveillance officer and the VBD officer, work under it.',{lvl:3}),
+  N('shd','State health dept (DHS)',852,620,150,30,'staff','The State Health Secretary and the Directorate of Health Services. They oversee district health offices and the state programme units, including the State Surveillance Unit and the State VBD officer.',{lvl:4}),
+  N('msu','Metropolitan Surveillance Unit',492,750,150,30,'staff','Metropolitan Surveillance Units (MSUs), set up under PM-ABHIM inside municipal corporations in 20 cities. An MSU analyses real-time IHIP data from public and private reporting units, verifies alerts, joins rapid response teams, and coordinates with the state and district surveillance units. NCDC\'s Central Surveillance Unit gives technical oversight (NCDC draft operational guidelines, 2022).',{lvl:2}),
   N('spo','State VBD officer',852,668,150,30,'staff','The state vector-borne disease cell compiles district reports, daily in the transmission season and weekly otherwise, and sends the state\'s kit requirement to NIV Pune.',{lvl:4}),
   N('sso','State surveillance unit',852,708,150,30,'staff','The IDSP state surveillance unit compiles districts and forwards outbreak reports to NCDC.',{lvl:4}),
   N('ncvbdc','NCVBDC',NX,668,150,30,'staff','National Center for Vector Borne Diseases Control (DGHS), which runs the programme still called NVBDCP. Compiles state reports, publishes the state-wise dengue table and allocates test kits from the previous year\'s cases.',{lvl:5}),
   N('ncdc','NCDC (IDSP)',NX,708,150,30,'staff','The central surveillance unit at NCDC receives outbreak reports from every state each week, with nil reporting mandatory, and publishes the weekly outbreak report.',{lvl:5}),
   // digital
-  N('ihip','IHIP: IDSP S, P and L forms',679,834,834,36,'bar','Integrated Health Information Platform, run by NCDC: case-based, near-real-time reporting of 30+ diseases, nationwide since April 2021. In 2025, 77% of reporting units filed S forms, 81% P forms and 82% L forms.',{lvl:1,closed:'Case records closed. Public only via outbreak reports',closedShort:'records closed; figures via outbreak reports',status:'Case records are closed. The public sees IHIP only through weekly outbreak reports and state bulletins.'}),
-  N('ihipvbd','IHIP-VBD (NCVBDC)',679,886,834,36,'bar','A separate NCVBDC module of IHIP, with case forms for malaria, dengue, chikungunya and Japanese encephalitis. The board treated IHIP as one stream; it is two. Field studies find programme data still partly aggregated weekly on paper.',{lvl:1,closed:'Case records closed. Public only via the NCVBDC table',closedShort:'records closed; figures via the NCVBDC table',status:'Login only. The public sees it through the NCVBDC state-wise table.'}),
+  N('ihip','IHIP: IDSP S, P and L forms',679,834,834,36,'bar','Integrated Health Information Platform, run by NCDC: case-based, near-real-time reporting of 30+ diseases, nationwide since April 2021. In 2025, 77% of reporting units filed S forms, 81% P forms and 82% L forms. S forms (suspected syndromes) are filled by ASHAs, ANMs, MPWs, CHOs/MLHPs and Anganwadi workers. P forms (probable cases) by medical officers at PHCs and UPHCs, physicians and casualty medical officers at CHCs and sub-district hospitals, nodal surveillance officers at district hospitals and medical colleges, and data entry operators who key in paper registers. L forms (lab) by lab technicians at PHCs, CHCs and district public health labs, microbiologists and pathologists at sentinel hospitals, and nodal officers at NABL-accredited private labs.',{lvl:1,closed:'Case records closed. Public only via outbreak reports',closedShort:'records closed; figures via outbreak reports',status:'Case records are closed. The public sees IHIP only through weekly outbreak reports and state bulletins.'}),
+  N('ihipvbd','IHIP Vector-Borne Diseases Portal (NCVBDC)',679,886,834,36,'bar','A separate NCVBDC module of IHIP, with case forms for malaria, dengue, chikungunya and Japanese encephalitis. The board treated IHIP as one stream; it is two. Field studies find programme data still partly aggregated weekly on paper. Its users include the district surveillance officer, district health officer, district malaria officer and zonal entomologist, urban local bodies and MSUs, the State Surveillance Unit and state epidemiologists, and the State Health Secretary and Directorate of Health Services.',{lvl:1,closed:'Case records closed. Public only via the NCVBDC table',closedShort:'records closed; figures via the NCVBDC table',status:'Login only. The public sees it through the NCVBDC state-wise table.'}),
   N('hmis','HMIS',679,938,834,36,'bar','Monthly facility reports. For dengue they carry only inpatients (item 13.4.2) and deaths (15.7.4), with no test counts. The board had district data collected "in HMIS monthly"; the dengue content is that thin.',{lvl:1,source:true}),
   N('stateapp','State dengue dashboards',852,994,150,34,'gap','States and cities run their own dashboards and apps, such as Karnataka\'s disease surveillance dashboard with BBMP and IISc, and Kerala\'s AI-based early-warning system.',{lvl:4,status:'Not public.',route:'Ask state health departments for open district or ward summaries.',relx:770}),
   // other sources
@@ -2070,16 +2089,16 @@ function dengueConfig(){
  C.BUS={};['genbank','research','ncvbdcweb','idspweb','datagov','aikosh','othergov','statecity','icmrp','ibdc','smartportal'].forEach((k,i)=>C.BUS[k]=1146+i*2.6);
  C.INSTR_LANE=[
   {col:0,x:128,items:['Larval survey format','Breeding notice, challan'],full:['Entomological larval survey format: house, container and Breteau indices (NCVBDC compendium)','Breeding notice and challan under municipal bye-laws (₹500 in Delhi)']},
-  {col:1,x:312,items:['IDSP S form (sub-centre)','IDSP P form (any facility)','IDSP L form (any lab)','IHIP-VBD dengue form'],full:['IDSP S form: suspected syndromes, filled at sub-centres by ANMs and MPWs','IDSP P form: probable cases, filled by doctors at any public or private facility','IDSP L form: lab-confirmed cases, filled by any public or private lab','IHIP-VBD dengue case form (NCVBDC module)']},
+  {col:1,x:312,items:['IDSP S form (sub-centre)','IDSP P form (any facility)','IDSP L form (any lab)','IHIP-VBD dengue form'],full:['IDSP S form: suspected syndromes, filled by ASHAs, ANMs, MPWs, CHOs/MLHPs and Anganwadi workers','IDSP P form: probable cases, filled by medical officers at PHCs and UPHCs, physicians and casualty medical officers at CHCs and sub-district hospitals, nodal officers at district hospitals and medical colleges, and data entry operators','IDSP L form: lab cases, filled by lab technicians at PHCs, CHCs and district public health labs, microbiologists at sentinel hospitals and nodal officers at NABL-accredited private labs','IHIP-VBD dengue case form (NCVBDC module)'],links:[{to:'ihip',pts:[[240,272],[240,282],[36,282],[36,842],[262,842]]},{to:'ihipvbd',pts:[[240,272],[240,282],[36,282],[36,890],[262,890]]}]},
   {col:2,x:492,items:['Anti-larval round records','Fogging logs'],full:['Anti-larval and source-reduction round records (weekly)','Indoor space spray and outdoor fogging logs (outbreak-triggered)']},
   {col:3,x:672,items:['SSH line list (ELISA)','District dengue format','RRT outbreak report','Death review'],full:['Sentinel hospital line list of ELISA results, notified within 24 hours','District daily or weekly dengue format: suspected cases, samples, positives, deaths','Rapid response team outbreak investigation report','Dengue death review by a state or district committee']},
   {col:4,x:852,items:['State report to NCVBDC','Kit requirement to NIV'],full:['State report to NCVBDC, district-wise: daily in the transmission season, weekly otherwise','State kit requirement sent to ICMR-NIV Pune']},
   {col:5,x:NX,items:['Dengue situation table','Tentative kit allocation','Weekly outbreak report'],full:['NCVBDC state-wise dengue cases and deaths','Tentative state-wise IgM kit allocation (12,800 dengue kits for 2026)','IDSP weekly outbreak report (NCDC central surveillance unit)']}];
- C.INSTR={sc:['IDSP S form (suspected syndromes)'],phc:['IDSP P form (probable cases)','Referral with blood sample to a sentinel hospital'],pvt:['IDSP P form, where reported','State notification form (Delhi, Kerala, Tamil Nadu, Karnataka)'],chc:['IDSP P form'],
+ C.INSTR={asha:['IDSP S form (suspected syndromes)'],sc:['IDSP S form (suspected syndromes)'],phc:['IDSP P form (probable cases)','Referral with blood sample to a sentinel hospital'],pvt:['IDSP P form, where reported','State notification form (Delhi, Kerala, Tamil Nadu, Karnataka)'],chc:['IDSP P form (physicians and casualty medical officers)'],msu:['Daily IHIP surveillance analysis','Weekly MSU report'],
   sshlab:['IDSP L form','Sentinel hospital ELISA line list','Kit stock register'],pvtlab:['IDSP L form, where reported'],dbc:['Larval survey format (house, container, Breteau indices)'],vcw:['Anti-larval round records','Fogging logs','Breeding notices and challans'],
-  zonal:['Entomological sentinel-site survey format'],dmo:['District daily or weekly dengue format','Death review form'],dso:['Weekly outbreak report','Rapid response team investigation report'],spo:['State report to NCVBDC','State kit requirement'],
-  sso:['State weekly outbreak report'],ncvbdc:['Dengue situation table','Tentative state-wise kit allocation'],ncdc:['IDSP weekly outbreak report'],dh:['Case sheet and MRD record','HMIS inpatient and death items'],mho:['Ward-wise weekly vector-borne disease report']};
- C.KBADGES=[[936,644,'1','ncvbdc>spo'],[900,606,'2','spo>kitbox'],[848,430,'3','kitbox>sshlab'],[702,412,'4','kitbox>sshlab'],[767,398,'4','kitbox>arl']];
+  zonal:['Entomological sentinel-site survey format','House, Container and Breteau index calculation'],dmo:['District daily or weekly dengue format','Death review form'],dso:['Weekly outbreak report','Rapid response team investigation report'],spo:['State report to NCVBDC','State kit requirement'],
+  sso:['State weekly outbreak report'],ncvbdc:['Dengue situation table','Tentative state-wise kit allocation'],ncdc:['IDSP weekly outbreak report'],dh:['IDSP P form (nodal surveillance officer)','Case sheet and MRD record','HMIS inpatient and death items'],mho:['Ward-wise weekly vector-borne disease report']};
+ C.KBADGES=[[936,644,'1','ncvbdc>spo'],[941,604,'2','spo>kitbox'],[848,430,'3','kitbox>sshlab'],[702,412,'4','kitbox>sshlab'],[767,398,'4','kitbox>arl']];
  C.ETYPES=[['p','Patient or sample moves','var(--pt)',''],['e','Data entered or passed on','var(--r3)',''],['r','Reports to','var(--ink)','4 3'],['k','Test kits allocated and supplied','#B0527E','2 3'],['x','Released to the public','var(--trace)','']];
  const O=(pts)=>()=>({o:pts});
  C.EDGES=[
@@ -2094,19 +2113,43 @@ function dengueConfig(){
   E('sshlab','arl','p',O([[757,366],[764,366],[764,354],[777,354]])),E('arl','vrdl','p'),
   E('vrdl','seq','e',O([[927,396],[936,396],[936,138],[946,138]])),E('niv','seq','e',O([[1096,368],[1100,368],[1100,146],[1096,146]])),
   // test kits
-  E('ncvbdc','spo','k',O([[946,660],[927,660]])),E('spo','kitbox','k',O([[900,653],[900,560],[946,560]])),E('niv','kitbox','k',O([[1021,393],[1021,452]])),
+  E('ncvbdc','spo','k',O([[946,660],[927,660]])),E('spo','kitbox','k',O([[910,653],[910,644],[941,644],[941,560],[946,560]])),E('niv','kitbox','k',O([[1021,393],[1021,452]])),
   E('kitbox','sshlab','k',O([[962,452],[962,430],[702,430],[702,393]])),E('kitbox','arl','k',O([[962,452],[962,430],[767,430],[767,362],[777,362]])),
   // reporting into the platforms
   E('sc','ihip','e',O([[227,516],[220,516],[220,830],[262,830]])),E('pvt','ihip','e',O([[227,474],[224,474],[224,824],[262,824]])),E('phc','ihip','e',O([[300,595],[300,816]])),
   E('sshlab','ihip','e',O([[757,380],[760,380],[760,816]])),E('sshlab','ihipvbd','e',O([[757,388],[768,388],[768,868]])),
-  E('ihip','dso','e',O([[751,816],[751,716],[747,716]])),E('ihip','ncdc','e',O([[1096,828],[1100,828],[1100,718],[1096,718]])),E('ihipvbd','ncvbdc','e',O([[944,868],[944,678],[946,678]])),
+  E('ihip','dso','e',O([[751,816],[751,719],[747,719]])),E('ihip','ncdc','e',O([[1096,828],[1100,828],[1100,718],[1096,718]])),E('ihipvbd','ncvbdc','e',O([[944,868],[944,678],[946,678]])),
   E('dh','hmis','e',O([[587,488],[580,488],[580,920]])),E('dh','mccd','e',O([[587,494],[584,494],[584,1046],[312,1046],[312,1055]])),E('dh','pmjay','e',O([[591,496],[591,977]])),
   // notification and reporting chains
   E('sshlab','dmo','e',O([[757,372],[763,372],[763,662],[747,662]])),E('sshlab','mho','e',O([[757,392],[765,392],[765,746],[747,746]])),
-  E('phc','bmo','r',O([[324,595],[324,668],[417,668]])),E('bmo','dmo','r'),
+  E('phc','bmo','r',O([[324,595],[324,708],[417,708]])),E('bmo','dmo','r',O([[540,693],[540,672],[597,672]])),E('bmo','dso','r'),
   E('dmo','spo','r'),E('spo','ncvbdc','r',O([[927,674],[946,674]])),E('dso','sso','r'),E('sso','ncdc','r'),E('mho','sso','r',O([[747,754],[820,754],[820,723]])),
   E('sso','stateapp','e',O([[884,723],[884,977]])),
   E('vrdl','icmr','e',O([[927,406],[938,406],[938,1066],[946,1066]])),
+  // entomologist shares indices
+  E('zonal','vcw','e',O([[777,120],[770,120],[770,104],[757,104]])),
+  E('zonal','dso','e',O([[790,130],[790,140],[774,140],[774,698],[747,698]])),
+  E('zonal','dho','e',O([[790,130],[790,140],[774,140],[774,560],[700,560],[700,605]])),
+  E('zonal','city','e',O([[790,130],[790,140],[774,140],[774,560],[520,560],[520,602]])),
+  // district and city offices
+  E('dho','shd','r'),E('mho','dso','r',O([[672,735],[672,723]])),
+  E('msu','city','r',O([[417,754],[410,754],[410,630],[417,630]])),E('msu','ihip','r',O([[480,765],[480,816]])),
+  // IDSP forms by who fills them
+  E('asha','ihip','e',O([[213,530],[216,530],[216,836],[262,836]])),
+  E('chc','ihip','e',O([[420,541],[420,590],[405,590],[405,816]])),
+  E('dh','ihip','e',O([[587,488],[580,488],[580,816]])),
+  E('pvtlab','ihip','e',O([[232,384],[224,384],[224,824],[262,824]])),
+  // samples to the VRDLs
+  E('sshlab','vrdl','p',O([[745,393],[745,404],[777,404]])),
+  E('phc','vrdl','p',O([[397,584],[404,584],[404,446],[745,446],[745,404],[777,404]])),
+  // who uses the IHIP Vector-Borne Diseases Portal
+  E('ihipvbd','dso','e',O([[755,868],[755,714],[747,714]])),
+  E('ihipvbd','dho','e',O([[755,868],[755,628],[747,628]])),
+  E('ihipvbd','dmo','e',O([[755,868],[755,676],[747,676]])),
+  E('ihipvbd','sso','e',O([[755,868],[755,718],[777,718]])),
+  E('ihipvbd','shd','e',O([[755,868],[755,628],[777,628]])),
+  E('ihipvbd','msu','e',O([[510,868],[510,765]])),
+  E('ihipvbd','city','e',O([[414,868],[414,626],[417,626]])),
   // national offices to public products
   E('ncvbdc','situ','e',O([[1096,656],[1104,656],[1104,226],[1215,226]])),E('ncvbdc','parl','e',O([[1096,664],[1112,664],[1112,514],[1215,514]])),
   E('ncvbdc','mohrep','e',O([[1096,680],[1116,680],[1116,726],[1215,726]])),E('ncdc','outbreak','e',O([[1096,698],[1120,698],[1120,370],[1215,370]])),
@@ -2230,7 +2273,7 @@ const TB_TEXT={short:'TB',Short:'TB',recordsLower:'TB records',hub:'nikshay',hub
  worth:({nk,gaps})=>[`Ni-kshay holds every case, yet only ${fmt(nk)} entries trace back to it, all as totals.`,`${gaps} systems are dashed red: they collect data but release none directly. What is known of them reaches the public only through reports and parliament answers.`,'The thick yellow lines are HMIS and the Census. Most of the volume isn\'t TB-specific.',(()=>{const z=Object.keys(VOC.link).filter(k=>!DS.some(d=>d.kind!=='NOT_TB'&&d.rt!=='REFERENCE'&&d.links.includes(k)));return `${z.length} linked domains have no data at all, among them ${z.slice(0,4).map(k=>VOC.link[k].toLowerCase()).join(', ')}. Their chips are dashed.`;})()],
  provenance:()=>`Every box, count, route and place comes from the dataset tags, version ${esc(TAGS.version)}. Unrelated matches and mentions stay out unless you switch them on.`};
 DX=TB_TEXT;
-const TBCFG={key:'tb',name:'Tuberculosis',viewBox:'-130 0 1530 1320',LEVELS,STAGE_LABEL,PORT,PORT_NODE,FREQ,DS,VOC,VDEF,SERIES,NODE_TAGS,LGROUP,EXPECT_INFRA,COLS,LANES,NODES,TRUNK,BUS,INSTR_LANE,INSTR_Y:160,INSTR_W:170,
+const TBCFG={key:'tb',name:'Tuberculosis',viewBox:'-130 0 1530 1388',LEVELS,STAGE_LABEL,PORT,PORT_NODE,FREQ,DS,VOC,VDEF,SERIES,NODE_TAGS,LGROUP,EXPECT_INFRA,COLS,LANES,NODES,TRUNK,BUS,INSTR_LANE,INSTR_Y:160,INSTR_W:170,
  EDGES,STORIES,SLOTS,ACTORS,GAPS,COLLECT,TOPL,INSTR,COVER,ETYPES,DX:TB_TEXT,kindLabels:Object.fromEntries(KINDS.map(k=>[k.k,k.label])),kindDesc:Object.fromEntries(KINDS.map(k=>[k.k,k.desc]))};
 function useDisease(k,first){
   const C=k==='dengue'?(DCFG||(DCFG=dengueConfig())):TBCFG;
@@ -2254,4 +2297,3 @@ useDisease(/dengue/.test(location.hash)?'dengue':'tb',true);
 </script>
 </body>
 </html>
-
